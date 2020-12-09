@@ -1,3 +1,5 @@
+"""Advent of code 2020 day 1."""
+
 from typing import List
 
 
@@ -6,6 +8,7 @@ def find_product_of_two(nums: List[int], value: int) -> int:
     for n in nums:
         if n in needs:
             return n * (2020 - n)
+    return 0
 
 
 def find_product_of_three(nums: List[int], value: int) -> int:
@@ -13,6 +16,7 @@ def find_product_of_three(nums: List[int], value: int) -> int:
     for n in nums:
         if n in needs:
             return n * needs[n][0] * needs[n][1]
+    return 0
 
 
 if __name__ == "__main__":

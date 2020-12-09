@@ -1,11 +1,13 @@
+"""Advent of code 2020 day 2."""
+
 from typing import Tuple
 
 
 def parse_policy(policy_str: str) -> Tuple[str, int, int]:
     letter, min_occ, max_occ = (
-        policy_str.split(" ")[1], 
-        int(policy_str.split(" ")[0].split("-")[0]), 
-        int(policy_str.split(" ")[0].split("-")[1])
+        policy_str.split(" ")[1],
+        int(policy_str.split(" ")[0].split("-")[0]),
+        int(policy_str.split(" ")[0].split("-")[1]),
     )
     return letter, min_occ, max_occ
 
@@ -23,10 +25,8 @@ def is_valid(line: str) -> bool:
 def is_valid_new(line: str) -> bool:
     policy_str, password = line.split(": ")[0], line.split(": ")[1]
     letter, min_occ, max_occ = parse_policy(policy_str)
-    return (
-        (password[min_occ - 1] == letter and password[max_occ - 1] != letter) 
-        or 
-        (password[min_occ - 1] != letter and password[max_occ - 1] == letter)
+    return (password[min_occ - 1] == letter and password[max_occ - 1] != letter) or (
+        password[min_occ - 1] != letter and password[max_occ - 1] == letter
     )
 
 
@@ -41,4 +41,3 @@ if __name__ == "__main__":
         n_valid_new += is_valid_new(line)
     print(n_valid)
     print(n_valid_new)
-

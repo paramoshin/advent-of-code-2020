@@ -1,3 +1,5 @@
+"""Advent of code 2020 day 8."""
+
 from typing import List, Tuple
 
 
@@ -37,8 +39,7 @@ def run_code(commands: List[str]) -> Tuple[str, int]:
     return status, acc
 
 
-def fix_program(commands: List[str]) -> List[str]:
-    positions = set()
+def fix_program(commands: List[str]) -> Tuple[str, int]:
     for i, command in enumerate(commands):
         if "nop" in command:
             original_command = command
@@ -60,15 +61,15 @@ def fix_program(commands: List[str]) -> List[str]:
 
 
 if __name__ == "__main__":
-#     commands = """nop +0
-# acc +1
-# jmp +4
-# acc +3
-# jmp -3
-# acc -99
-# acc +1
-# jmp -4
-# acc +6""".split("\n")
+    #     commands = """nop +0
+    # acc +1
+    # jmp +4
+    # acc +3
+    # jmp -3
+    # acc -99
+    # acc +1
+    # jmp -4
+    # acc +6""".split("\n")
 
     with open("input/day8.txt", "r") as f:
         commands = f.read().splitlines()

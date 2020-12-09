@@ -1,0 +1,15 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  - repo: local
+    hooks:
+    -   id: analyse
+        name: isort/black/mypy checks
+        language: script
+        require_serial: true
+        entry: ./precommit.sh
+        files: ^.*.py$
