@@ -3,4 +3,4 @@
 . .venv/bin/activate
 black "$@"
 isort -y "$@"
-mypy "$@"
+mypy --config-file pyproject.toml "$@"

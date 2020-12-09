@@ -2,6 +2,10 @@
 
 from typing import Tuple
 
+import pytest
+
+from utils import read_input
+
 
 def parse_policy(policy_str: str) -> Tuple[str, int, int]:
     letter, min_occ, max_occ = (
@@ -30,14 +34,59 @@ def is_valid_new(line: str) -> bool:
     )
 
 
-if __name__ == "__main__":
-    with open("input/day2.txt", "r") as f:
-        lines = f.readlines()
-
+def part1(s: str) -> int:
     n_valid = 0
-    n_valid_new = 0
-    for line in lines:
+    for line in s.split("\n"):
         n_valid += is_valid(line)
+    return n_valid
+
+
+def part2(s: str) -> int:
+    n_valid_new = 0
+    for line in s.split("\n"):
         n_valid_new += is_valid_new(line)
-    print(n_valid)
-    print(n_valid_new)
+    return n_valid_new
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    (
+        (
+            """\
+1-3 a: abcde
+1-3 b: cdefg
+2-9 c: ccccccccc""",
+            2,
+        ),
+    ),
+)
+def test_part1(test_input: str, expected: int) -> None:
+    assert part1(test_input) == expected
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    (
+        (
+            """\
+1-3 a: abcde
+1-3 b: cdefg
+2-9 c: ccccccccc""",
+            1,
+        ),
+    ),
+)
+def test_part2(test_input: str, expected: int) -> None:
+    assert part2(test_input) == expected
+
+
+def main() -> Tuple[int, int]:
+    s = read_input(__file__)
+    result_1 = part1(s)
+    result_2 = part2(s)
+    return result_1, result_2
+
+
+if __name__ == "__main__":
+    result_1, result_2 = main()
+    print(result_1, result_2)

@@ -2,6 +2,10 @@
 
 from typing import List, Tuple
 
+import pytest
+
+from utils import read_input
+
 
 def run_code(commands: List[str]) -> Tuple[str, int]:
     call_count = {}
@@ -60,22 +64,69 @@ def fix_program(commands: List[str]) -> Tuple[str, int]:
     return "error", 0
 
 
-if __name__ == "__main__":
-    #     commands = """nop +0
-    # acc +1
-    # jmp +4
-    # acc +3
-    # jmp -3
-    # acc -99
-    # acc +1
-    # jmp -4
-    # acc +6""".split("\n")
-
-    with open("input/day8.txt", "r") as f:
-        commands = f.read().splitlines()
-
+def part1(s: str) -> int:
+    commands = s.split("\n")
     _, acc = run_code(commands)
-    print(acc)
+    return acc
 
-    status, acc = fix_program(commands)
-    print(status, acc)
+
+def part2(s: str) -> int:
+    commands = s.split("\n")
+    _, acc = fix_program(commands)
+    return acc
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    (
+        (
+            """\
+nop +0
+acc +1
+jmp +4
+acc +3
+jmp -3
+acc -99
+acc +1
+jmp -4
+acc +6""",
+            5,
+        ),
+    ),
+)
+def test_part1(test_input: str, expected: int) -> None:
+    assert part1(test_input) == expected
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    (
+        (
+            """\
+nop +0
+acc +1
+jmp +4
+acc +3
+jmp -3
+acc -99
+acc +1
+jmp -4
+acc +6""",
+            8,
+        ),
+    ),
+)
+def test_part2(test_input: str, expected: int) -> None:
+    assert part2(test_input) == expected
+
+
+def main() -> Tuple[int, int]:
+    s = read_input(__file__)
+    result_1 = part1(s)
+    result_2 = part2(s)
+    return result_1, result_2
+
+
+if __name__ == "__main__":
+    result_1, result_2 = main()
+    print(result_1, result_2)
