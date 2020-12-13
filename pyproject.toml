@@ -6,6 +6,7 @@ authors = []
 
 [tool.poetry.dependencies]
 python = "^3.9"
+sympy = "^1.7.1"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
